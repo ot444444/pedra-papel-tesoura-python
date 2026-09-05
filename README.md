@@ -24,3 +24,7 @@ Certifique-se de ter Python 3 instalado.
 
 ```bash
 python main.py
+
+## Autores
+
+Projeto desenvolvido por Otavio Kavinski e Gabriel G. como atividade acadêmica da disciplina de Raciocínio Algorítmico da PUCPR.
