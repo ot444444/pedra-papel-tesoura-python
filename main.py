@@ -1,147 +1,106 @@
-import random
+import random  ##import random
 
-# Escolha da categoria de Jogo:
-# Humano com Humano, Humano com Computador ou Computador com Computador
+print ("Escolha a Categoria : ") ## escolha da categoria
+categoria = int(input("1 para HxH ; 2 para HxC ; 3 para CxC : ")) ## input da escolha
 
-print("Escolha a Categoria: ")
-categoria = int(input("1 para HxH ; 2 para HxC ; 3 para CxC : "))
+while categoria < 1 or categoria > 3: ## loop escolhas invalidas
+    print("Categoria Invalida") ## aviso
+    categoria = int(input("1 para HxH ; 2 para HxC ; 3 para CxC : ")) ## repetir
 
-while categoria < 1 or categoria > 3:
-    print("Categoria Invalida")
-    categoria = int(input("1 para HxH ; 2 para HxC ; 3 para CxC : "))
-
-# Valores para opcoes de jogo
+## variaveis
 pedra = 1
 tesoura = 2
 papel = 3
-
 ponto1 = 0
 ponto2 = 0
-
 escolha1 = 0
 escolha2 = 0
 
-loop = True
-
-while loop:
-
-    # Jogo Humano x Humano
-    if categoria == 1:
-
-        print("Pedra = 1, Tesoura = 2, Papel = 3")
-
-        escolha1 = int(input("Digite sua escolha: "))
-
-        while escolha1 < 1 or escolha1 > 3:
-            print("Escolha Invalida")
-            escolha1 = int(input("Digite sua escolha: "))
-
-        if escolha1 == 1:
-            print("O Jogador um Escolheu Pedra")
-        elif escolha1 == 2:
-            print("O Jogador um Escolheu Tesoura")
-        else:
-            print("O Jogador um Escolheu Papel")
-
-        escolha2 = int(input("Digite sua escolha: "))
-
-        while escolha2 < 1 or escolha2 > 3:
-            print("Escolha Invalida")
-            escolha2 = int(input("Digite sua escolha: "))
-
+## funacao do jogo
+def jogo(escolha1, escolha2): ## criando func
+    global ponto1
+    global ponto2
+    if escolha1 == escolha2:
+        print("Empate!!")
+    elif escolha1 == 1:  # J1 escolheu pedra
+        if escolha2 == 2:
+            print("J1 Ganhou!!")
+            ponto1 += 1
+        elif escolha2 == 3:
+            print("J2 Ganhou!!")
+            ponto2 += 1
+    elif escolha1 == 2:  # J1 escolheu tesoura
         if escolha2 == 1:
-            print("O Jogador dois Escolheu Pedra")
-        elif escolha2 == 2:
-            print("O Jogador dois Escolheu Tesoura")
-        else:
-            print("O Jogador dois Escolheu Papel")
-
-    # Jogo Humano x Maquina
-    elif categoria == 2:
-
-        print("Pedra = 1, Tesoura = 2, Papel = 3")
-
-        escolha1 = int(input("Digite sua escolha: "))
-
-        while escolha1 < 1 or escolha1 > 3:
-            print("Escolha Invalida")
-            escolha1 = int(input("Digite sua escolha: "))
-
-        if escolha1 == 1:
-            print("O Jogador um Escolheu Pedra")
-        elif escolha1 == 2:
-            print("O Jogador um Escolheu Tesoura")
-        else:
-            print("O Jogador um Escolheu Papel")
-
-        escolha2 = random.randint(1, 3)
-
+            print("J2 Ganhou!!")
+            ponto2 += 1
+        elif escolha2 == 3:
+            print("J1 Ganhou!!")
+            ponto1 += 1
+    elif escolha1 == 3:  # J1 escolheu papel
         if escolha2 == 1:
-            print("A Maquina Escolheu Pedra")
+            print("J1 Ganhou!!")
+            ponto1 += 1
         elif escolha2 == 2:
-            print("A Maquina Escolheu Tesoura")
-        else:
-            print("A Maquina Escolheu Papel")
+            print("J2 Ganhou!!")
+            ponto2 += 1
+    print(f"Placar: {ponto1} X {ponto2}")
 
-    # Jogo Maquina x Maquina
-    elif categoria == 3:
+## funcao para mostrar as ecolhas
+def mostrar_escolha(jogador, escolha): ## criando func
+    if escolha == 1: ## escolhe pedra
+        print(f"O {jogador} escolheu pedra") ## avisa
+    elif escolha == 2: ## escolhe tesoura
+        print(f"O {jogador} escolheu tesoura") ## avisa
+    elif escolha == 3: ## escolhe papel
+        print(f"O {jogador} escolheu papel") ## avisa
 
-        escolha1 = random.randint(1, 3)
-        escolha2 = random.randint(1, 3)
+## funcao para verificacao e pedir escolha
+def pedir_escolha(jogador): ## criando func
+    print("Pedra = 1, Tesoura = 2, Papel = 3") ## escolhas
+    print(f"Escolha do {jogador}") ## aviso
+    escolha = int(input("Digite sua escolha: ")) ## pede escolha
 
-        if escolha1 == 1:
-            print("A Maquina um Escolheu Pedra")
-        elif escolha1 == 2:
-            print("A Maquina um Escolheu Tesoura")
-        else:
-            print("A Maquina um Escolheu Papel")
+    while escolha < 1 or escolha > 3: ## loop verificacao de escolha
+        print("Escolha invalida") ## aviso
+        print("Pedra = 1, Tesoura = 2, Papel = 3") ## tabela
+        escolha = int(input("Digite sua escolha : ")) ## pede escolha novamente
 
-        if escolha2 == 1:
-            print("A Maquina dois Escolheu Pedra")
-        elif escolha2 == 2:
-            print("A Maquina dois Escolheu Tesoura")
-        else:
-            print("A Maquina dois Escolheu Papel")
+    return escolha ## retorna escolha para a memoria
 
-    # Regras Pedra, Papel e Tesoura
-    if escolha1 == 1 and escolha2 == 2:
-        print("Vitoria do Primeiro Jogador")
-        ponto1 += 1
+loop = True ## ativa loop
 
-    elif escolha1 == 1 and escolha2 == 3:
-        print("Vitoria do Segundo Jogador")
-        ponto2 += 1
+while loop: ## enquanto loop
+    ## escolhas
+    if categoria == 1: ## categoria 1
+        escolha1 = pedir_escolha("J1") ## pedindo escolha J1
+        mostrar_escolha("J1", escolha1) ## mostra escolha J1
+        escolha2 = pedir_escolha("J2") ## pedindo escolha J1
+    elif categoria == 2: ## categoria 2
+        escolha1 = pedir_escolha("J1") ## pedindo escolha J1
+        mostrar_escolha("J1", escolha1) ## mostra escolha J1
+        escolha2 = random.randint(1, 3) ## escolha random J2
+    else: ## categoria 3
+        escolha1 = random.randint(1, 3) ## escolha random J1
+        mostrar_escolha("J1", escolha1) ## mostra escolha J1
+        escolha2 = random.randint(1, 3) ## escolha random J2
+    mostrar_escolha("J2", escolha2) ## mostra escolha J2
 
-    elif escolha1 == 2 and escolha2 == 1:
-        print("Vitoria do Segundo Jogador")
-        ponto2 += 1
+    jogo(escolha1, escolha2) ## ativa jogo
+    print("Voce quer continuar jogando") ## quer continuar?
+    continuar = int(input("1 para Sim e 2 para Nao : ")) ## resposta
 
-    elif escolha1 == 2 and escolha2 == 3:
-        print("Vitoria do Primeiro Jogador")
-        ponto1 += 1
+    while continuar < 1 or continuar > 2: ## verificacao
+        print("Valor invalido") ## aviso
+        continuar = int(input("1 para Sim e 2 para Nao : ")) ## nova resposta
+    if continuar == 2: ## se nao quiser continuar
+        print(f"placar final: {ponto1} x {ponto2}") ## placar final
+        loop = False ## encerra loop
 
-    elif escolha1 == 3 and escolha2 == 1:
-        print("Vitoria do Primeiro Jogador")
-        ponto1 += 1
+print("Fim de jogo. Obrigado por jogar ; Jogo por: Otavio K e Gabriel G.") ## msg do fim
 
-    elif escolha1 == 3 and escolha2 == 2:
-        print("Vitoria do Segundo Jogador")
-        ponto2 += 1
 
-    else:
-        print("Empate")
 
-    print(f"{ponto1} x {ponto2}")
 
-    print("Voce quer continuar jogando")
-    continuar = int(input("1 para Sim e 2 para Nao: "))
-
-    while continuar < 1 or continuar > 2:
-        print("Valor invalido")
-        continuar = int(input("1 para Sim e 2 para Nao: "))
-
-    if continuar == 2:
-        print(f"Placar final: {ponto1} x {ponto2}")
-        loop = False
-
-print("Fim de jogo. Obrigado por jogar; Jogo por: Otavio K e Gabriel G.")
+    
+               
+            
